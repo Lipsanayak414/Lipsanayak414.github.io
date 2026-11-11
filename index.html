@@ -1235,24 +1235,26 @@ const ABOUT = {
 // Chalkboard menu = resume (shown on the About page).
 const MENU = {
   experience: [
-    { role:"Business Analyst", org:"Cision Inc, London", when:"Jan 2024 – now", points:[
-      "Coordinate the review and approval of new AI use cases, and material changes to live ones, across Cision's products",
-      "Assess each submission for customer data use, third-party AI vendors, Google Cloud (Vertex AI) architecture and business value, in line with Cision's AI Code of Ethics",
-      "Agree a risk rating for each use case with legal, compliance, security and privacy teams",
-      "Led the standardisation of 70+ enterprise KPIs, with governance and lineage controls that reached 100% audit readiness",
-      "Redesigned the MI delivery process with product and engineering, cutting turnaround from 14 days to 3",
+    { role:"Technical Business Analyst", org:"Cision Inc, Remote", when:"Jan 2024 – now", points:[
+      "Defined acceptance criteria and analyst sign-off processes for an internal multi-agent AI reporting platform, using a 300-report evaluation set to identify recurring failures. This helped reduce analyst time per report by approximately 45% and increase the proportion of AI-generated insights accepted without major edits from 55% to 80%",
+      "Redesigned the client-reporting pipeline in Databricks with incremental loading, cutting full-refresh time from approximately six hours to 70 minutes and improving dashboard freshness-target compliance from 85% to 99%",
+      "Built an account-health scoring model combining product usage and support data to flag customers at risk of non-renewal. The model extended early-warning visibility from 20 to approximately 75 days before renewal, covering accounts representing £1.1M in annual contract value",
+      "Identified friction in the new-user onboarding journey through funnel analysis, then designed and evaluated an A/B test for an in-app prompt that increased 30-day adoption of smart alerts from 22% to 31%",
+      "Produced data-mapping specifications and test scripts for migrating clients onto CisionOne, cutting post-launch defects by 40%,
       "Built forecasting models and profitability dashboards that improved forecast accuracy by 32% and cut manual reporting by 45%"] },
     { role:"Business Analyst", org:"Frontier Space Technologies, Birmingham", when:"2023", points:[
-      "Built finance-backed business cases for retention and pricing, improving campaign effectiveness by 18%",
-      "Provided the cost and market evidence used in UK Space Agency funding applications",
-      "Benchmarked competitors and reviewed public funding rules, including the National Space Innovation Programme"] },
+      "Translated research customers' experimental needs into approximately 120 structured requirements, each mapped to a corresponding verification test",
+      "Designed a cost-per-experiment model incorporating more than 25 cost drivers across three demand scenarios, supporting investor discussions and customer proposals",
+      "Automated ground-test analysis with Python scripts that processed sensor and imaging logs into standardised reports, reducing analysis time from approximately one day to two hours per run",
+      "Drafted the technical specification for experiment-data delivery, covering approximately 40 metadata fields, file formats, measurement units and integrity checks"] },
     { role:"Business Analyst", org:"Brillio, India", when:"2022", points:[
-      "Reengineered internal reporting, increasing visibility of sales performance by 35%",
-      "Built KPI packs for regional reviews and the finance cadence",
-      "Assessed technology investments with solution architects"] },
+      "Rationalised a client's reporting estate from approximately 180 reports to 70 ahead of a data-platform migration, mapping each report to the business decision it supported",
+      "Developed source-to-target mappings and reconciliation rules for a data migration that went live with zero critical (priority-one) defects, then automated validation checks to reduce execution time from three days to approximately four hours",
+      "Analysed a client's digital sign-up journey with SQL funnel analysis, identifying two stages responsible for approximately half of all drop-offs and giving the team evidence to prioritise fixes in the product backlog"] },
     { role:"Data Analyst", org:"Infosys, India", when:"2021 – 2022", points:[
-      "Developed AI-powered forecasting models for executive financial planning",
-      "Standardised performance metrics and governance frameworks, passing multiple audits with zero findings"] }
+      "Automated a three-day manual reporting process with SQL and Python, cutting turnaround to approximately four hours",
+      "Introduced automated control checks after each data load, reducing reconciliation discrepancies between source systems and the data warehouse by approximately 35%",
+      "Optimised inefficient SQL stored procedures, shortening the nightly batch-processing window by approximately 40%"] }
   ],
   skills: [
     ["Analytics & modelling","SQL, Python (pandas, scikit-learn, statsmodels), Excel, scenario and sensitivity, cohort and churn, time series"],
