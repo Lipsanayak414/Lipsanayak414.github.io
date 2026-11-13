@@ -462,19 +462,31 @@ dialog.chalk .sheet-head{border-color:rgba(235,232,223,.15)}
 dialog.chalk .kicker{color:#f1cf7a}
 dialog.chalk h2{font:700 clamp(38px,5vw,52px)/1 var(--f-hand)}
 dialog.chalk .x{border-color:rgba(235,232,223,.3)}
-.menu{display:grid;gap:26px}
+.menu{display:grid;gap:40px}
 .menu .special{margin:0;font-size:16px;line-height:1.55;color:#ebe8df;max-width:70ch}
 .menu h3{font:700 27px/1 var(--f-hand);color:#f1cf7a;margin:0 0 10px}
 .mi{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:baseline;gap:10px}
 .mi .dots{border-bottom:2px dotted rgba(235,232,223,.35);translate:0 -5px}
 .mi .r{font:600 17px/1.3 var(--f-body)}
 .mi .w{font:500 14px/1.3 var(--f-mono);color:#c8c4b8}
-.menu ul{margin:6px 0 14px;padding-left:18px;color:#d9d5ca;font-size:15px;display:grid;gap:3px}
+.menu ul{margin:8px 0 26px;padding-left:18px;color:#d9d5ca;font-size:15px;line-height:1.55;display:grid;gap:7px}
 .menu ul.socials{display:flex;flex-wrap:wrap;gap:10px;padding-left:0;margin:4px 0 0}
-.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px 22px;margin:0}
-.skills div{display:flex;flex-direction:column}
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 44px;margin:4px 0 0}
+.skills>div{display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid rgba(235,232,223,.14)}
 .skills dt{font:600 16px/1.3 var(--f-body)}
-.skills dd{margin:0;font-size:14px;color:#c8c4b8}
+.skills dd{margin:0;font-size:14px;line-height:1.6;color:#c8c4b8}
+.job{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 44px;padding-top:16px;border-top:1px solid rgba(235,232,223,.14)}
+.job+.job{margin-top:26px}
+.job-meta{display:flex;flex-direction:column;gap:4px}
+.job-meta .r{font:600 17px/1.3 var(--f-body)}
+.job-meta .w{font-size:15px;color:#d9d5ca}
+.job-meta .when{font:500 13px/1.4 var(--f-mono);color:#f1cf7a}
+.menu .job ul{grid-column:span 2;margin:0}
+.menu-foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 44px}
+.menu-foot .edu-sec{grid-column:span 2}
+.edu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 44px}
+@media (max-width:900px){.job{grid-template-columns:1fr}.menu .job ul{grid-column:auto}.skills{grid-template-columns:repeat(2,minmax(0,1fr))}.menu-foot{grid-template-columns:1fr}.menu-foot .edu-sec{grid-column:auto}}
+@media (max-width:560px){.skills,.edu{grid-template-columns:1fr}}
 .skills .sub{display:block;margin-top:8px;padding-left:10px;border-left:2px solid rgba(241,207,122,.4)}
 .skills .sub:first-child{margin-top:4px}
 .skills .sub b{display:block;font:600 11px/1.6 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:#f1cf7a}
@@ -1264,11 +1276,12 @@ const MENU = {
       "Introduced automated control checks after each data load, reducing reconciliation discrepancies between source systems and the data warehouse by approximately 35%",
       "Optimised inefficient SQL stored procedures, shortening the nightly batch-processing window by approximately 40%"] }
   ],
-    skills: [
-    ["Data engineering","SQL, Python, PySpark, Databricks, Delta Lake, PostgreSQL, ETL and Incremental Pipelines, Data Modelling, Data Quality and Reconciliation Checks, Data Lineage"],
-    ["Analytics and experimentation","Statistical Modelling (pandas, scikit-learn, statsmodels), Forecasting and Time Series, A/B Testing and Experiment Design, Cohort and Churn Analysis, Scenario and Sensitivity Analysis, Funnel and Product Analytics, Power BI (DAX), Excel"],
-    ["Business analysis","Requirements Engineering (Elicitation, User Stories, Traceability), Stakeholder Management, Process Mapping (BPMN), Gap and Root Cause Analysis, Data Mapping Specifications, UAT and Test Scripts, Agile (Jira, Confluence)"],
-    ["AI evaluation and governance",[
+      skills: [
+    ["Data Engineering","SQL, Python, PySpark, Databricks, Delta Lake, PostgreSQL, ETL and Incremental Pipelines, Data Modelling, Data Quality and Reconciliation Checks, Data Lineage"],
+    ["Analytics and Experimentation","Statistical Modelling (pandas, scikit-learn, statsmodels), Forecasting and Time Series, A/B Testing and Experiment Design, Cohort and Churn Analysis, Scenario and Sensitivity Analysis, Funnel and Product Analytics"],
+    ["Business Intelligence","Power BI (DAX), Excel, KPI Design and Governance, Dashboard Design, Data Visualisation and Storytelling, Report Rationalisation"],
+    ["Business Analysis","Requirements Engineering (Elicitation, User Stories, Traceability), Stakeholder Management, Process Mapping (BPMN), Gap and Root Cause Analysis, Data Mapping Specifications, UAT and Test Scripts, Agile (Jira, Confluence)"],
+    ["AI Evaluation and Governance",[
       ["Evaluation","Evaluation Datasets, Output Validation, Acceptance Criteria"],
       ["Assurance","Human Oversight, Risk Assessment, Vendor Assessment"],
       ["Regulatory knowledge","EU AI Act"]]],
@@ -1596,9 +1609,9 @@ document.addEventListener("keydown", e => { if (e.key === "Escape"){ const c = d
 let shelfT = 0; window.addEventListener("resize", () => { clearTimeout(shelfT); shelfT = setTimeout(fillShelves, 120); });
 function renderAbout(){
   const M = MENU, A = ABOUT;
-  const exp = M.experience.map(e => `<div class="mi"><span class="r">${esc(e.role)}</span><span class="dots"></span><span class="w">${esc(e.when)}</span></div>
-    <div class="w" style="margin-top:2px">${esc(e.org)}</div><ul>${e.points.map(x => `<li>${esc(x)}</li>`).join("")}</ul>`).join("");
-  const edu = M.education.map(e => `<div class="mi"><span class="r">${esc(e.what)}</span>${e.when ? `<span class="dots"></span><span class="w">${esc(e.when)}</span>` : ""}</div><div class="w" style="margin:2px 0 10px">${esc(e.where)}</div>`).join("");
+  const exp = M.experience.map(e => `<div class="job"><div class="job-meta"><span class="r">${esc(e.role)}</span><span class="w">${esc(e.org)}</span><span class="when">${esc(e.when)}</span></div>
+    <ul>${e.points.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+  const edu = M.education.map(e => `<div><div class="mi"><span class="r">${esc(e.what)}</span>${e.when ? `<span class="dots"></span><span class="w">${esc(e.when)}</span>` : ""}</div><div class="w" style="margin-top:3px">${esc(e.where)}</div></div>`).join("");
   const lang = (M.languages || []).map(([l, w]) => `<div class="mi"><span class="r">${esc(l)}</span><span class="dots"></span><span class="w">${esc(w)}</span></div>`).join("");
   const say = socialHTML();
   $("#aboutBody").innerHTML = `
@@ -1610,9 +1623,9 @@ function renderAbout(){
       ${M.special ? `<section><h3>Today's special</h3><p class="special">${esc(M.special)}</p></section>` : ""}
       <section><h3>House special · experience</h3>${exp}</section>
       <section><h3>Freshly ground · skills</h3><dl class="skills">${M.skills.map(([k, d]) => `<div><dt>${esc(k)}</dt><dd>${Array.isArray(d) ? d.map(([s, t]) => `<span class="sub"><b>${esc(s)}</b>${esc(t)}</span>`).join("") : esc(d)}</dd></div>`).join("")}</dl></section>
-      <section><h3>Baked in · education</h3>${edu}</section>
       ${lang ? `<section><h3>Languages</h3>${lang}</section>` : ""}
-      ${say ? `<section><h3>Say hoi</h3><ul class="socials">${say}</ul></section>` : ""}
+      <div class="menu-foot"><section class="edu-sec"><h3>Baked in · education</h3><div class="edu">${edu}</div></section>
+      ${say ? `<section><h3>Say hoi</h3><ul class="socials icons">${say}</ul></section>` : ""}</div>
     </div></section>`;
 }
 
