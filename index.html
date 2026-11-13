@@ -1274,16 +1274,13 @@ const MENU = {
       "Introduced automated control checks after each data load, reducing reconciliation discrepancies between source systems and the data warehouse by approximately 35%",
       "Optimised inefficient SQL stored procedures, shortening the nightly batch-processing window by approximately 40%"] }
   ],
-      skills: [
-    ["Data Engineering","SQL, Python, PySpark, Databricks, Delta Lake, PostgreSQL, ETL and Incremental Pipelines, Data Modelling, Data Quality and Reconciliation Checks, Data Lineage"],
-    ["Analytics and Experimentation","Statistical Modelling (pandas, scikit-learn, statsmodels), Forecasting and Time Series, A/B Testing and Experiment Design, Cohort and Churn Analysis, Scenario and Sensitivity Analysis, Funnel and Product Analytics"],
-    ["Business Intelligence","Power BI (DAX), Excel, KPI Design and Governance, Dashboard Design, Data Visualisation and Storytelling, Report Rationalisation"],
-    ["Business Analysis","Requirements Engineering (Elicitation, User Stories, Traceability), Stakeholder Management, Process Mapping (BPMN), Gap and Root Cause Analysis, Data Mapping Specifications, UAT and Test Scripts, Agile (Jira, Confluence)"],
-    ["AI Evaluation and Governance",[
-      ["Evaluation","Evaluation Datasets, Output Validation, Acceptance Criteria"],
-      ["Assurance","Human Oversight, Risk Assessment, Vendor Assessment"],
-      ["Regulatory knowledge","EU AI Act"]]],
-    ["AI agents and automation","CrewAI, LangGraph, n8n, FastAPI, Multi-agent Workflows, Human-in-the-loop Design"]
+        skills: [
+    ["Data Engineering",["SQL · Python · PySpark","Databricks · Delta Lake · PostgreSQL","ETL · Data Modelling","Data Quality · Lineage"]],
+    ["Analytics and Experimentation",["Statistical Modelling","Forecasting · Time Series","A/B Testing · Cohort · Churn","Scenario · Sensitivity Analysis"]],
+    ["Business Intelligence",["Power BI · DAX · Excel","KPI Frameworks","Dashboard Design","Data Storytelling"]],
+    ["Business Analysis",["Requirements Engineering","Elicitation · Traceability","User Stories · UAT · Agile","BPMN · Stakeholder Management"]],
+    ["AI Evaluation and Governance",["Evaluation Datasets","Output Validation","Human Oversight · Risk Assessment","Regulatory Knowledge · EU AI Act"]],
+    ["AI Agents and Automation",["CrewAI · LangGraph · n8n","FastAPI","Multi-agent Workflows","Human-in-the-loop Design"]]
   ],
   education: [
     { what:"MSc in Management", where:"Cranfield University", when:"" },
@@ -1607,9 +1604,9 @@ document.addEventListener("keydown", e => { if (e.key === "Escape"){ const c = d
 let shelfT = 0; window.addEventListener("resize", () => { clearTimeout(shelfT); shelfT = setTimeout(fillShelves, 120); });
 function renderAbout(){
   const M = MENU, A = ABOUT;
-  const exp = M.experience.map(e => `<div class="job"><div class="job-meta"><span class="r">${esc(e.role)}</span><span class="w">${esc(e.org)}</span><span class="when">${esc(e.when)}</span></div>
-    <ul>${e.points.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
-  const edu = M.education.map(e => `<div><div class="mi"><span class="r">${esc(e.what)}</span>${e.when ? `<span class="dots"></span><span class="w">${esc(e.when)}</span>` : ""}</div><div class="w" style="margin-top:3px">${esc(e.where)}</div></div>`).join("");
+  const meta = (r, w, when) => `<div class="meta"><span class="r">${esc(r)}</span><span class="w">${esc(w)}</span>${when ? `<span class="when">${esc(when)}</span>` : ""}</div>`;
+  const exp = M.experience.map(e => `<div class="job">${meta(e.role, e.org, e.when)}<ul>${e.points.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>`).join("");
+  const edu = M.education.map(e => meta(e.what, e.where, e.when)).join("");
   const lang = (M.languages || []).map(([l, w]) => `<div class="mi"><span class="r">${esc(l)}</span><span class="dots"></span><span class="w">${esc(w)}</span></div>`).join("");
   const say = socialHTML();
   $("#aboutBody").innerHTML = `
@@ -1620,10 +1617,10 @@ function renderAbout(){
     <section class="board-panel" aria-labelledby="menuTitle"><h2 id="menuTitle">Today's menu</h2><div class="menu">
       ${M.special ? `<section><h3>Today's special</h3><p class="special">${esc(M.special)}</p></section>` : ""}
       <section><h3>House special · experience</h3>${exp}</section>
-      <section><h3>Freshly ground · skills</h3><dl class="skills">${M.skills.map(([k, d]) => `<div><dt>${esc(k)}</dt><dd>${Array.isArray(d) ? d.map(([s, t]) => `<span class="sub"><b>${esc(s)}</b>${esc(t)}</span>`).join("") : esc(d)}</dd></div>`).join("")}</dl></section>
+      <section><h3>Freshly ground · skills</h3><dl class="cols skills">${M.skills.map(([k, d]) => `<div><dt>${esc(k)}</dt><dd>${(Array.isArray(d) ? d : [d]).map(x => `<span>${esc(x)}</span>`).join("")}</dd></div>`).join("")}</dl></section>
+      <section><h3>Baked in · education</h3><div class="cols">${edu}</div></section>
       ${lang ? `<section><h3>Languages</h3>${lang}</section>` : ""}
-      <div class="menu-foot"><section class="edu-sec"><h3>Baked in · education</h3><div class="edu">${edu}</div></section>
-      ${say ? `<section><h3>Say hoi</h3><ul class="socials icons">${say}</ul></section>` : ""}</div>
+      ${say ? `<section><h3>Say hello</h3><p class="say-note">Always happy to connect over a good idea or coffee.</p><ul class="socials">${say}</ul></section>` : ""}
     </div></section>`;
 }
 
